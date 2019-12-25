@@ -49,7 +49,7 @@
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav navbar-right">
 							<li><a href="index.html">首页 </a></li>
-							<li><a href="#">优惠开户</a></li>
+							<li><a href="caijingbowen.html">优惠开户</a></li>
 							<li class="active"><a href="newslist.html">财经十二<span class="sr-only">(current)</span></a>
 								<p class="line-top hidden-xs"></p>
 							</li>
@@ -260,10 +260,12 @@
 		var	site=[];
 
 		$.ajax({
-			url: 'sever/xinwen.json',
+			url: 'http://www.yugyud.com/sever/xinwen.js',
 			type: 'get',
 			data: {},
-			dataType: 'json' 
+			dataType: 'jsonp',
+			jsonp: "callback",
+			jsonpCallback:"successCallback",
 		}).then(function(res) {
 			
 		var id = sessionStorage.getItem('id');

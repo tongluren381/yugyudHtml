@@ -2,7 +2,7 @@
 	header("Content-type:text/html;charset=UTF-8");
 	require "../admin/connet.php";   //导入mysql.php访问数据库 
 	$conn=new Mysql();
-	$sql="SELECT * FROM news WHERE type='seo' order by id desc ";
+	$sql="SELECT * FROM news WHERE type='知识' order by id desc ";
     $result=$conn->sql($sql);
 	class Xinwen
 	{
@@ -38,14 +38,14 @@
 		$xinwen ->weight=$row['weight'];
 		$xinwen ->id=$row['id'];
 		$xinwen ->keyWords=$row['keyWords'];
-		$data[] = $xinwen;
-				
+		$data[] = $xinwen;		
 	 }	;
 	$json_string =json_encode($data);
 // 	echo  json_encode($data);
 	
-// file_put_contents('seo.json', $json_string);
-	$jsonp="successCallback(".$json_string.")";
-	echo $jsonp ;
+// file_put_contents('zhishi.json', $json_string);
+$jsonp="successCallback(".$json_string.")";
+echo $jsonp ;
+
+file_put_contents('zhishi.js', $jsonp);	
 	
-	file_put_contents('seo.js', $jsonp);	

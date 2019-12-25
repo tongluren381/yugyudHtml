@@ -8,7 +8,7 @@
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <meta name="renderer" content="webkit">
     <!-- 目前仅限360急速浏览 webkit:急速  ie-comp:ie兼容模式   ie-stand: ie标准模式 -->
-    <title>学习进阶</title>
+    <title class="siteTitle"></title>
     <meta name="keywords" content="股票基础知识，投资知识">
     <meta name="description" content="股票基础知识，投资知识">
     <!-- Bootstrap中文字体版 -->
@@ -74,7 +74,7 @@
 	</div>
 </div>
 
-<div class="main-container" id="app">
+<div class="main-container" >
 <div class="container">
 <div class="row main-container-row" style="position: relative">
 <div class="col-sm-3">
@@ -134,13 +134,40 @@
 	</div>
 </div>
 <div class="col-xs-12 col-sm-9 usinfo-article">
-	<div class="article-title">
-		<h1 class="h2 titleKey"><small class="hidden-xs"></small></h1>
-	</div>
-	<ul class="list-group" v-for="site in sites">
-	  <li class="list-group-item list-group-item-success"><a v-on:click="cunIdtiao(site.title)">{{site.title}}</a></li>
+						<div class="article-title" >
 
-	</ul>
+						
+							
+								<h3 class="siteTitle">
+									{{site.title}}
+								</h3>
+								<p class="siteDate">{{site.date}}</p>
+								<p  class="siteWeight " id="num5">
+									<span>影响力: <span class="star"><i>★★★★★</i></span></span>
+								</p>
+								<p  class="siteWeight" id="num4">
+									<span>影响力: <span class="star"><i>★★★★</i>★</span></span>
+								</p>										
+								<p  class="siteWeight " id="num3">
+									<span>影响力: <span class="star"><i>★★★</i>★★</span></span>
+								</p>	
+								<p n class="siteWeight " id="num2">
+									<span>影响力: <span class="star"><i>★★</i>★★★</span></span>
+								</p>
+								<p  class="siteWeight" id="num1">
+									<span>影响力: <span class="star"><i>★</i>★★★★</span></span>
+								</p>																																
+
+								<div class="siteContent">
+									
+								</div>
+
+										
+
+
+								<hr>
+							
+						</div>
 </div>
 <p class="hidden-xs" id="left-line"></p>
 </div>
@@ -148,64 +175,7 @@
 </div>
 <!-- vue  js部分		 -->
 <script type="text/javascript">
-	var app = new Vue({
-		el: '#app',
-		data: {
-			sites: []
-		},
-		created: function() {
-			//为了在内部函数能使用外部函数的this对象，要给它赋值了一个名叫self的变量。
-			var self = this;
-			$.ajax({
-				url: 'http://www.yugyud.com/sever/zhishi.js',
-				type: 'get',
-				data: {},
-				dataType: 'jsonp',
-				jsonp: "callback",
-				jsonpCallback:"successCallback",
-			}).then(function(res) {
-				if(sessionStorage.getItem('titleKey')){
-					var titleKey = sessionStorage.getItem('titleKey');
-				}else{
-					var titleKey='股票';
-				};
-				$(".titleKey").html(titleKey);	
-				console.log($(".titleKey").html());			
-				console.log(titleKey);
-				console.log(res);
-				//把从json获取的数据赋值给数组	
-				$.each(res, function (i, item) {
-					var patt1 = new RegExp(titleKey);
-					var result = patt1.test(res[i].title);
-					if(result){
-						self.sites.push(res[i]) ;
-						//push给数组添加值pop删除
-						console.log(self.sites);
-					}
-					
-					
-				})											
-											
-				
-								
-			}).fail(function() {
-				console.log('失败');
-			})
-			
-		},
-		methods: {
-		cunIdtiao: function (title) {
-		sessionStorage.setItem('title', title);
-		location.href="zhishicontent.html";
-		}
-		// cunKeytiao:function (obj) {
-			
-		// 	alert($(obj).html() );
-			
-			
-		// }
-		}
-	});
+
 	// 下面的点击获取this对象，用obj，这里再用this不好使，不知道为什么。还有就是在vue methods里用this还是用obj都不好使，为什么？
 	function cunKeytiao(obj){
 		console.log($(obj).html());
@@ -215,7 +185,74 @@
 		location.href="xuexijinjie.html";
 	}
 	
-</script>	
+</script>
+<!-- 写入页面数据js	 -->
+<script type="text/javascript">
+	$(function(){
+		var	site=[];
+
+		$.ajax({
+			url: 'http://www.yugyud.com/sever/zhishi.js',
+			type: 'get',
+			data: {},
+			dataType: 'jsonp',
+			jsonp: "callback",
+			jsonpCallback:"successCallback",
+		}).then(function(res) {
+			
+		var title = sessionStorage.getItem('title');
+			
+			console.log(title);
+			console.log(res);				
+			$.each(res, function (i, item) {
+				if(res[i].title == title ){
+					site = res[i];
+					console.log(site);
+				}
+				
+				
+			});										
+			//把从json获取的数据赋值给数组
+			$('meta[name="description"]').attr('content',site.jianjie );
+			$('meta[name="keywords"]').attr('content',site.keyWords );
+			
+			$(".siteWeight").hide();
+			
+			if(site.weight==5){
+				$("#num5").show();
+			}else if(site.weight==4){
+				$("#num4").show();
+			}else if(site.weight==3){
+				$("#num3").show();
+			}else if(site.weight==2){
+				$("#num2").show();
+			}else{
+				$("#num1").show();
+			};
+										
+			$(".siteTitle").html(site.title);
+			$(".siteDate").html(site.date);
+			
+			$(".siteContent").html(site.content);
+			$(".siteContent img").addClass("img-responsive center-block");
+			//把数据写入页面				
+		}).fail(function() {
+			console.log('失败');
+		})		
+		
+		
+		
+	})
+
+
+		
+
+
+
+
+	
+</script>		
+	
 
 <script type="text/javascript">
 	$(function(){

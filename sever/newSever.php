@@ -40,8 +40,14 @@
 		$xinwen ->keyWords=$row['keyWords'];
 		$data[] = $xinwen;		
 	 }	;
-	$json_string =json_encode($data);
-	echo  json_encode($data);
-	
-file_put_contents('xinwen.json', $json_string);
+	 
+	$json_string = json_encode($data);
+
+
+	// echo $json_string;
+$jsonp="successCallback(".$json_string.")";
+echo $jsonp ;
+
+file_put_contents('xinwen.js', $jsonp);	
+// file_put_contents('xinwen.json', $json_string);
 	

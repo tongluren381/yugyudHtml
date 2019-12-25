@@ -1,8 +1,8 @@
 <?php
 header("Content-type:text/html;charset=UTF-8");
 $ueContent=$_POST['ueContent'];
-$title=$_POST['title'];
-$date=$_POST['date'];
+$title=$_POST['title'];   
+$date=$_POST["date"]==""?date('Y-m-d'):$_POST["date"];
 $author=$_POST['author'];
 $type=$_POST['type'];
 $keyWords=$_POST['keyWords'];

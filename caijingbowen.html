@@ -49,8 +49,8 @@
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav navbar-right">
 							<li><a href="index.html">首页 </a></li>
-							<li><a href="#">优惠开户</a></li>
-							<li ><a href="newslist.php">财经十二</a>
+							<li><a href="caijingbowen.html">优惠开户</a></li>
+							<li ><a href="newslist.html">财经十二</a>
 								
 							</li>
 							<li><a href="xuexijinjie.html">学习进阶</a></li>
@@ -219,10 +219,12 @@
 			//为了在内部函数能使用外部函数的this对象，要给它赋值了一个名叫self的变量。
 			var self = this;
 			$.ajax({
-				url: 'sever/seo.json',
+				url: 'http://www.yugyud.com/sever/seo.js',
 				type: 'get',
 				data: {},
-				dataType: 'json'
+				dataType: 'jsonp',
+				jsonp: "callback",
+				jsonpCallback:"successCallback",
 			}).then(function(res) {
 				console.log(res);
 				//把从json获取的数据赋值给数组
