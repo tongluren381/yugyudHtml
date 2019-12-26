@@ -5,7 +5,7 @@ $(function(){
 	$.ajax({
 		type:'GET',		
 		// url:'sever/xinwen.json',
-		url:'http://www.yugyud.com/sever/xinwen.js',
+		url:'sever/xinwen.js',
 		timeout:2000,
 		// async:true, 
 		// crossDomain:false,  //是否跨域

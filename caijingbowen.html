@@ -42,21 +42,21 @@
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand" style="padding:0 0 0 15px;" href="index.html"><img alt="Brand" style="max-width:130px;"
-							 src="images/logo.png"></a>
+						<a class="navbar-brand" style="padding:0 0 0 15px;" href="index.html"><img alt="股票开户" style="max-width:130px;"
+                                                                                  src="images/logo.png"><span class="hide">股票开户</span></a>
 					</div>
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav navbar-right">
 							<li><a href="index.html">首页 </a></li>
-							<li><a href="caijingbowen.html">优惠开户</a></li>
+							<li><a href="seocontent.html?id=58">优惠开户</a></li>
 							<li ><a href="newslist.html">财经十二</a>
 								
 							</li>
 							<li><a href="xuexijinjie.html">学习进阶</a></li>
 							<li class="active"><a href="caijingbowen.html">财经博文<span class="sr-only">(current)</span></a><p class="line-top hidden-xs"></p></li>
 							<!--放seo文章的-->
-							<li><a href="#">联系我们</a></li>
+							<li><a href="seocontent.html?id=58">联系我们</a></li>
 
 						</ul>
 					</div>
@@ -70,8 +70,8 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<ol class="breadcrumb" style="margin-top: 10px; margin-bottom: 10px;">
-						<li><a href="/www.yugyud.com/index.html">首页</a></li>
-						<li><a href="/www.yugyud.com/newslist.html">财经十二</a></li>
+						<li><a href="index.html">首页</a></li>
+						<li><a href="caijingbowen.html">财经博文</a></li>
 					</ol>
 				</div>
 			</div>
@@ -219,7 +219,7 @@
 			//为了在内部函数能使用外部函数的this对象，要给它赋值了一个名叫self的变量。
 			var self = this;
 			$.ajax({
-				url: 'http://www.yugyud.com/sever/seo.js',
+				url: 'sever/seo.js',
 				type: 'get',
 				data: {},
 				dataType: 'jsonp',
@@ -236,8 +236,8 @@
 		},
 		methods: {
 		cunIdtiao: function (id) {
-		sessionStorage.setItem('id', id);
-		location.href="seocontent.html";
+		// sessionStorage.setItem('id', id);
+		location.href="seocontent.html?id="+id;
 		}
 		}		
 	});
