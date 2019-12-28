@@ -12,3 +12,4 @@
 最后用jsonp解决了，解决过程出了很多问题，主要是jsonpCallback:"successCallback",这个设置一直没加，加了就没问题了
 面包屑导航很适合做移动端列表类目.
 应为a标签跳转是js不适合seo所以改成了href。
+12-28更新 新增了用php批量生成静态html
