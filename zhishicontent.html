@@ -97,20 +97,20 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">股票 <span class="caret"></span></a>
           <ul class="dropdown-menu">			  
-            <li><a href='javascript:void(0);' onclick="cunKeytiao(this)">股票</a></li>
-            <li><a href='javascript:void(0);' onclick="cunKeytiao(this)">创业板</a></li>
-            <li><a href='javascript:void(0);' onclick="cunKeytiao(this)">科创板</a></li>            
-            <li><a href='javascript:void(0);' onclick="cunKeytiao(this)">融资融券</a></li>
-			<li><a href='javascript:void(0);' onclick="cunKeytiao(this)">港股通</a></li>
-			<li><a href='javascript:void(0);' onclick="cunKeytiao(this)">三板</a></li>
+            <li><a href="xuexijinjie.html?titleKey=股票">股票</a></li>
+            <li><a href="xuexijinjie.html?titleKey=创业板">创业板</a></li>
+            <li><a href="xuexijinjie.html?titleKey=科创板">科创板</a></li>            
+            <li><a href="xuexijinjie.html?titleKey=融资融券">融资融券</a></li>
+			<li><a href="xuexijinjie.html?titleKey=港股通">港股通</a></li>
+			<li><a href="xuexijinjie.html?titleKey=三板">三板</a></li>
           </ul>
         </li>
-		<li><a href='javascript:void(0);' onclick="cunKeytiao(this)">债券</a></li>
-		<li><a href='javascript:void(0);' onclick="cunKeytiao(this)">基金</a></li>
-		<li><a href='javascript:void(0);' onclick="cunKeytiao(this)">期货</a></li>
-		<li><a href='javascript:void(0);' onclick="cunKeytiao(this)">黄金</a></li>
-		<li><a href='javascript:void(0);' onclick="cunKeytiao(this)">外汇</a></li>
-		<li><a href='javascript:void(0);' onclick="cunKeytiao(this)">其他</a></li>
+		<li><a href="xuexijinjie.html?titleKey=债券">债券</a></li>
+		<li><a href="xuexijinjie.html?titleKey=基金">基金</a></li>
+		<li><a href="xuexijinjie.html?titleKey=期货">期货</a></li>
+		<li><a href="xuexijinjie.html?titleKey=黄金">黄金</a></li>
+		<li><a href="xuexijinjie.html?titleKey=外汇">外汇</a></li>
+		<li><a href="xuexijinjie.html?titleKey=其他">其他</a></li>
       </ul>
 
     </div><!-- /.navbar-collapse -->
@@ -161,13 +161,13 @@
 <script type="text/javascript">
 
 	// 下面的点击获取this对象，用obj，这里再用this不好使，不知道为什么。还有就是在vue methods里用this还是用obj都不好使，为什么？
-	function cunKeytiao(obj){
-		console.log($(obj).html());
-		var titleKey=$(obj).html();
+	// function cunKeytiao(obj){
+	// 	console.log($(obj).html());
+	// 	var titleKey=$(obj).html();
 		
-		sessionStorage.setItem('titleKey', titleKey);
-		location.href="xuexijinjie.html";
-	}
+	// 	sessionStorage.setItem('titleKey', titleKey);
+	// 	location.href="xuexijinjie.html";
+	// }
 	
 </script>
 <!-- 写入页面数据js	 -->

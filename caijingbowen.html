@@ -90,7 +90,7 @@
 						</tr> -->
 						<div  v-for="site in sites">
 
-							<a v-on:click="cunIdtiao(site.id)">
+							<a :href='"seocontent.html?id="+site.id'>
 								<div class="row ">
 
 									<div class="col-md-7">
@@ -233,13 +233,13 @@
 				console.log('失败');
 			})
 			
-		},
-		methods: {
-		cunIdtiao: function (id) {
-		// sessionStorage.setItem('id', id);
-		location.href="seocontent.html?id="+id;
 		}
-		}		
+		// methods: {
+		// cunIdtiao: function (id) {
+		// // sessionStorage.setItem('id', id);
+		// location.href="seocontent.html?id="+id;
+		// }
+		// }		
 	});
 	
 </script>		

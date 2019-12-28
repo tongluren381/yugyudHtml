@@ -90,7 +90,9 @@
 						</tr> -->
 						<div  v-for="site in sites">
 
-							<a v-on:click="cunIdtiao(site.id)">
+							<a :href='"newscontent.html?id="+site.id'>
+								<!-- 蜘蛛抓取不到js，所以为了优化最好的事href跳转，不用js，ajax -->
+								
 								<div class="row ">
 
 									<div class="col-md-7">
@@ -222,6 +224,7 @@
 			$.ajax({
 				url: 'sever/xinwen.js',
 				type: 'get',
+				async:false, 
 				data: {},
 				dataType: 'jsonp',
 				jsonp: "callback",
@@ -235,13 +238,13 @@
 				console.log('失败');
 			})
 			
-		},
-		methods: {
-		cunIdtiao: function (id) {
-		// sessionStorage.setItem('id', id); //想想还是觉得session的方法传值，调用服务器，存值不好
-		location.href="newscontent.html?id="+id;
 		}
-		}
+		// methods: {
+		// cunIdtiao: function (id) {
+		// // sessionStorage.setItem('id', id); //想想还是觉得session的方法传值，调用服务器，存值不好
+		// location.href="newscontent.html?id="+id;
+		// }
+		// }
 	});
 	
 </script>	

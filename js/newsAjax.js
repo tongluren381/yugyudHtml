@@ -28,9 +28,9 @@ $(function(){
 												
 			jsondatas[i].jianjie = jsondatas[i].jianjie.substring(0, 53) + "..."	;		
 				
-			 var newsHtml = $("<div class='col-sm-6 col-md-4'><a  href='javascript:void(0);' onclick='cunIdtiao("
+			 var newsHtml = $("<div class='col-sm-6 col-md-4'><a  href='newscontent.html?id="
 			  +jsondatas[i].id
-			  +")'><div class='thumbnail'>"
+			  +"'><div class='thumbnail'>"
               +jsondatas[i].imgH      
               +"<div class='caption' ><h4 style='height: 50px;'>"
               +jsondatas[i].title
@@ -92,9 +92,9 @@ $(function(){
 	
 });
 
-function cunIdtiao(id) {
+// function cunIdtiao(id) {
 		
-		sessionStorage.setItem('id', id);
-		location.href="newscontent.html";
-	}
+// 		sessionStorage.setItem('id', id);
+// 		location.href="newscontent.html";
+// 	}
 	
