@@ -11,6 +11,7 @@
 		<title class="siteTitle"></title>
 		<meta name="keywords" content="股票开户,北京股票开户,炒股,手续费,佣金">
 		<meta name="description" content="专业为股民服务" class="siteJianjie">
+		<link rel="icon" type="image/x-icon" href="images/g.ico" />
 		<!-- Bootstrap中文字体版 -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<!-- 自定义样式 -->
@@ -262,6 +263,7 @@
 		$.ajax({
 			url: 'sever/seo.js',
 			type: 'get',
+			async:false, 
 			data: {},
 			dataType: 'jsonp',
 			jsonp: "callback",

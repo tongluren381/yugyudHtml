@@ -11,6 +11,7 @@
     <title>学习进阶</title>
     <meta name="keywords" content="股票基础知识，投资知识">
     <meta name="description" content="股票基础知识，投资知识">
+	<link rel="icon" type="image/x-icon" href="images/g.ico" />
     <!-- Bootstrap中文字体版 -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- 自定义样式 -->
@@ -147,6 +148,7 @@
 			$.ajax({
 				url: 'sever/zhishi.js',
 				type: 'get',
+				async:false, 
 				data: {},
 				dataType: 'jsonp',
 				jsonp: "callback",
