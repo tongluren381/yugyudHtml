@@ -1,4 +1,73 @@
-<!DOCTYPE html>
+<?php
+	header("Content-type:text/html;charset=UTF-8");
+	require "../admin/connet.php";   //导入mysql.php访问数据库 
+	$conn=new Mysql();
+	$sql="SELECT * FROM news WHERE type='新闻' order by id desc ";
+    $result=$conn->sql($sql);
+
+	
+	$num_results = $result -> num_rows; //结果行数 
+	$forHtml="";
+	$w5Html="";
+	 for($i =0  ;$i < $num_results ;$i++)//循环输出每组元素
+	  {
+	 	$row = $result -> fetch_assoc();
+		echo $row['id'];
+		if($row["weight"]==5){
+			$weHtml="<span>影响力: <span class='star'><i>★★★★★</i></span></span>";
+			$w5Html.="<li><a target='_blank' href='news/newscontent-".$row['id']."'>".$row['title']."</a></li>";
+		}elseif($row["weight"]==4){
+			$weHtml="<span>影响力: <span class='star'><i>★★★★</i>★</span></span>";
+		}elseif($row["weight"]==3){
+			$weHtml="<span>影响力: <span class='star'><i>★★★</i>★★</span></span>";
+		}elseif($row["weight"]==2){
+			$weHtml="<span>影响力: <span class='star'><i>★★</i>★★★</span></span>";
+		}elseif($row["weight"]==1){
+			$weHtml="<span>影响力: <span class='star'><i>★</i>★★★★</span></span>";
+		};
+		$row['jianjie']=mb_substr($row['jianjie'], 0, 53, 'utf-8')."...";
+
+		
+		
+		
+		$forHtml.="<a href='news/newscontent-".$row['id'].".html'>
+								<!-- 蜘蛛抓取不到js，所以为了优化最好的事href跳转，不用js，ajax -->
+								
+								<div class='row '>
+
+									<div class='col-md-7'>
+
+										<h3 >
+											".$row['title']."
+										</h3>
+										<p>".$row['date']."</p>
+										<p >
+											".$weHtml."
+										</p>
+																																						
+
+										<p class='text-muted' style='font-size: 16px;' >
+											".$row['jianjie']."
+										</p>
+
+									</div>
+									<div class='col-md-5'   >
+										<img class='img-responsive center-block' src='".$row['imgUrl']."' alt='".$row['title']."'>
+									</div>
+								</div>
+							</a>
+							<hr>";
+	
+
+
+
+
+
+		
+		
+	 }	;
+
+	$htmlContent="<!DOCTYPE html>
 <html lang='zh-CN'>
 
 	<head>
@@ -8,7 +77,7 @@
 		<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
 		<meta name='renderer' content='webkit'>
 		<!-- 目前仅限360急速浏览 webkit:急速  ie-comp:ie兼容模式   ie-stand: ie标准模式 -->
-		<title>财经博文--北京股票开户</title>
+		<title>财经十二</title>
 		<meta name='keywords' content='股票开户,北京股票开户,炒股,手续费,佣金'>
 		<meta name='description' content='专业为股民服务'>
 		<link rel='icon' type='image/x-icon' href='images/g.ico' />
@@ -50,9 +119,11 @@
 						<ul class='nav navbar-nav navbar-right'>
 							<li><a href='index.html'>首页 </a></li>
 							<li><a href='seo/seocontent-58.html'>优惠开户</a></li>
-							<li ><a href='newslist.html'>财经十二</a></li>
+							<li class='active'><a href='newslist.html'>财经十二<span class='sr-only'>(current)</span></a>
+								<p class='line-top hidden-xs'></p>
+							</li>
 							<li><a href='xuexijinjie.html'>学习进阶</a></li>
-							<li class='active'><a href='caijingbowen.html'>财经博文<span class='sr-only'>(current)</span></a><p class='line-top hidden-xs'></p></li>
+							<li><a href='caijingbowen.html'>财经博文</a></li>
 							<!--放seo文章的-->
 							<li><a href='seo/seocontent-58.html'>联系我们</a></li>
 
@@ -69,7 +140,7 @@
 				<div class='col-sm-12'>
 					<ol class='breadcrumb' style='margin-top: 10px; margin-bottom: 10px;'>
 						<li><a href='index.html'>首页</a></li>
-						<li><a href='caijingbowen.html'>财经博文</a></li>
+						<li><a href='newslist.html'>财经十二</a></li>
 					</ol>
 				</div>
 			</div>
@@ -81,92 +152,8 @@
 				<div class='row main-container-row' style='position: relative'>
 					<div class='col-xs-12 col-sm-9  service-list' >
 
-						<div class='changeHtml'>
-						<a href='seo/seocontent-493.html'>
-								<!-- 蜘蛛抓取不到js，所以为了优化最好的事href跳转，不用js，ajax -->
-								
-								<div class='row '>
-
-									<div class='col-md-7'>
-
-										<h3 >
-											广发证券股票开户，广发证券客服，广发证券炒股开户，北京广发证券
-										</h3>
-										<p>2019-12-27</p>
-										<p >
-											<span>影响力: <span class='star'><i>★★</i>★★★</span></span>
-										</p>
-																																						
-
-										<p class='text-muted' style='font-size: 16px;' >
-											
-		...
-										</p>
-
-									</div>
-									<div class='col-md-5'   >
-										
-		
-									</div>
-								</div>
-							</a>
-							<hr><a href='seo/seocontent-492.html'>
-								<!-- 蜘蛛抓取不到js，所以为了优化最好的事href跳转，不用js，ajax -->
-								
-								<div class='row '>
-
-									<div class='col-md-7'>
-
-										<h3 >
-											股票开户为什么选择海通证券，海通证券股票开户去哪儿？
-										</h3>
-										<p>2019-12-27</p>
-										<p >
-											<span>影响力: <span class='star'><i>★★</i>★★★</span></span>
-										</p>
-																																						
-
-										<p class='text-muted' style='font-size: 16px;' >
-											股票开户为什么选择海通证券，海通证券股票开户去哪儿？
-		...
-										</p>
-
-									</div>
-									<div class='col-md-5'   >
-												
-				
-									</div>
-								</div>
-							</a>
-							<hr><a href='seo/seocontent-58.html'>
-								<!-- 蜘蛛抓取不到js，所以为了优化最好的事href跳转，不用js，ajax -->
-								
-								<div class='row '>
-
-									<div class='col-md-7'>
-
-										<h3 >
-											证券开户咨询电话，客服电话 17710722720
-										</h3>
-										<p>2019-12-21</p>
-										<p >
-											<span>影响力: <span class='star'><i>★★</i>★★★</span></span>
-										</p>
-																																						
-
-										<p class='text-muted' style='font-size: 16px;' >
-													咨询个人电话17710722720
-
-				...
-										</p>
-
-									</div>
-									<div class='col-md-5'   >
-																		
-									</div>
-								</div>
-							</a>
-							<hr>
+						<div >
+						".$forHtml."
 
 						</div>
 																		
@@ -193,7 +180,7 @@
 
 
 								<ul >									
-								<li><a href='seo/seocontent-58.html'>股票开户如何选择</a></li>
+									".$w5Html."
 								</ul>
 							
 
@@ -214,11 +201,6 @@
 				</div>
 			</div>
 		</div>
-<script type='text/javascript'>
-$(function(){
-	$('.changeHtml img').addClass('img-responsive center-block');
-})	
-</script>		
 		
 
 
@@ -446,4 +428,27 @@ $(function(){
 
 
 	</body>
-</html>
+</html>";
+
+// 	echo  json_encode($data);
+ file_put_contents("newslist.html", $htmlContent);
+
+
+
+
+
+
+
+
+
+	
+// file_put_contents('test.html', $htmlContent);
+// $jsonp="successCallback(".$json_string.")";
+// echo $jsonp ;
+
+// file_put_contents('zhishi.js', $jsonp);	
+
+
+
+
+	

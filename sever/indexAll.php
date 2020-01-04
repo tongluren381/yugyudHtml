@@ -1,4 +1,57 @@
-<!DOCTYPE html>
+<?php
+	header("Content-type:text/html;charset=UTF-8");
+	require "../admin/connet.php";   //导入mysql.php访问数据库 
+	$conn=new Mysql();
+	$sql="SELECT * FROM news WHERE type='新闻' order by id desc limit 0,12";
+    $result=$conn->sql($sql);
+
+	
+	$num_results = $result -> num_rows; //结果行数 
+	$news12Html="";
+	 for($i =0  ;$i < $num_results ;$i++)//循环输出每组元素
+	  {
+	 	$row = $result -> fetch_assoc();
+		echo $row['id'];
+		if($row["weight"]==5){
+			$weHtml="<span>影响力: <span class='star'><i>★★★★★</i></span></span>";
+		}elseif($row["weight"]==4){
+			$weHtml="<span>影响力: <span class='star'><i>★★★★</i>★</span></span>";
+		}elseif($row["weight"]==3){
+			$weHtml="<span>影响力: <span class='star'><i>★★★</i>★★</span></span>";
+		}elseif($row["weight"]==2){
+			$weHtml="<span>影响力: <span class='star'><i>★★</i>★★★</span></span>";
+		}elseif($row["weight"]==1){
+			$weHtml="<span>影响力: <span class='star'><i>★</i>★★★★</span></span>";
+		};
+		$row['jianjie']=mb_substr($row['jianjie'], 0, 53, 'utf-8')."...";
+
+		$news12Html.="<div class='col-sm-6 col-md-4 newSize'>
+		   	<a href='news/newscontent-".$row['id']."' class='newSize'>
+		        <div class='thumbnail'>             
+		           ".$row['imgH']."
+		        
+		            <div class='caption'>
+		                <h4 style='height: 50px;'>".$row['title']."</h4>
+		                <p style='height: 60px;'>".$row['jianjie']."</p>
+		                <p>
+		                  <small>".$row['author']."</small>  <small style='margin-left:10px;'>".$row['date']."</small> 
+		                </p>
+						<p>".$weHtml."</p>
+		            </div>
+		        </div>
+		    </a>
+		</div>";
+	
+
+
+
+
+
+		
+		
+	 }	;
+
+	$htmlContent="<!DOCTYPE html>
 	<html lang='zh-CN'>
 	
 	<head>
@@ -103,204 +156,7 @@
 	            <div id='news'>
 	            
 				
-				<div class='col-sm-6 col-md-4 newSize'>
-		   	<a href='news/newscontent-57' class='newSize'>
-		        <div class='thumbnail'>             
-		           <img src="/ueditor/php/upload/image/20191221/1576892871103956.jpg" title="1576892871103956.jpg" alt="0.webp (1).jpg"/>
-		        
-		            <div class='caption'>
-		                <h4 style='height: 50px;'>万科大涨140%，姚振华赚了350亿！再看四年“宝万之争”，到底谁赢了</h4>
-		                <p style='height: 60px;'>		宝能在2015年开始买入万科，掀起了“宝万之争”，也在当时催动万科股价节节升高。宝能姚振华虽未能如愿拿...</p>
-		                <p>
-		                  <small>闲鱼</small>  <small style='margin-left:10px;'>2019-12-21</small> 
-		                </p>
-						<p><span>影响力: <span class='star'><i>★★</i>★★★</span></span></p>
-		            </div>
-		        </div>
-		    </a>
-		</div><div class='col-sm-6 col-md-4 newSize'>
-		   	<a href='news/newscontent-55' class='newSize'>
-		        <div class='thumbnail'>             
-		           <img src="/ueditor/php/upload/image/20191221/1576892677359530.jpg" title="1576892677359530.jpg" alt="0.webp.jpg"/>
-		        
-		            <div class='caption'>
-		                <h4 style='height: 50px;'>上百家公司扎堆贺岁档，2019年中国电影会迎来怎样的收官之战？</h4>
-		                <p style='height: 60px;'>“资本退潮，影视寒冬”，这样的声音到了2019年年末，依然不绝于耳。
-
-在经历了前几年的野蛮增长之后，...</p>
-		                <p>
-		                  <small>闲鱼</small>  <small style='margin-left:10px;'>2019-12-21</small> 
-		                </p>
-						<p><span>影响力: <span class='star'><i>★★</i>★★★</span></span></p>
-		            </div>
-		        </div>
-		    </a>
-		</div><div class='col-sm-6 col-md-4 newSize'>
-		   	<a href='news/newscontent-54' class='newSize'>
-		        <div class='thumbnail'>             
-		           		<img src="/ueditor/php/upload/image/20191221/1576890772112089.jpg" title="1576890772112089.jpg" alt="5dfc33fd6227685985003788_1024.jpg"/>		
-		        
-		            <div class='caption'>
-		                <h4 style='height: 50px;'>这座承载一亿人希望的特大城市，楼市扛不住了？</h4>
-		                <p style='height: 60px;'>地段砖家黄大大，今天拍哪里？郑州！
-
-一个国家中心城市，雄踞中原。
-
-它一路赶超济南、哈尔滨、沈阳...</p>
-		                <p>
-		                  <small>闲鱼</small>  <small style='margin-left:10px;'>2019-12-21</small> 
-		                </p>
-						<p><span>影响力: <span class='star'><i>★★</i>★★★</span></span></p>
-		            </div>
-		        </div>
-		    </a>
-		</div><div class='col-sm-6 col-md-4 newSize'>
-		   	<a href='news/newscontent-53' class='newSize'>
-		        <div class='thumbnail'>             
-		           <img src="/ueditor/php/upload/image/20191221/1576890573116280.jpg" title="1576890573116280.jpg" alt="5df9e3ecb15ec0261c2d4021_1024.jpg"/>
-		        
-		            <div class='caption'>
-		                <h4 style='height: 50px;'>互联网公司福利缩水指南</h4>
-		                <p style='height: 60px;'>互联网公司曾是高薪酬、高福利的代表，买房提供无息贷款、每年享受旅行补贴、团建出国是标配、茶水间饮料水果随便...</p>
-		                <p>
-		                  <small>闲鱼</small>  <small style='margin-left:10px;'>2019-12-21</small> 
-		                </p>
-						<p><span>影响力: <span class='star'><i>★★</i>★★★</span></span></p>
-		            </div>
-		        </div>
-		    </a>
-		</div><div class='col-sm-6 col-md-4 newSize'>
-		   	<a href='news/newscontent-52' class='newSize'>
-		        <div class='thumbnail'>             
-		           <img src="/ueditor/php/upload/image/20191221/1576890483386339.jpg" title="1576890483386339.jpg" alt="5dfb35648e9f097d0b77cc7c_1024.jpg"/>
-		        
-		            <div class='caption'>
-		                <h4 style='height: 50px;'>功过柳传志：二流的企业家与三流的产品</h4>
-		                <p style='height: 60px;'>除了开风气之先的管理思想，结硬寨，打硬仗的能力，一流的企业家恐怕更需要看得更远的战略上的远见卓识，与创造一...</p>
-		                <p>
-		                  <small>闲鱼</small>  <small style='margin-left:10px;'>2019-12-21</small> 
-		                </p>
-						<p><span>影响力: <span class='star'><i>★★</i>★★★</span></span></p>
-		            </div>
-		        </div>
-		    </a>
-		</div><div class='col-sm-6 col-md-4 newSize'>
-		   	<a href='news/newscontent-51' class='newSize'>
-		        <div class='thumbnail'>             
-		           <img src="/ueditor/php/upload/image/20191221/1576890113107196.jpg" title="1576890113107196.jpg" alt="5dfc41358e9f09372b776673_1024.jpg"/>
-		        
-		            <div class='caption'>
-		                <h4 style='height: 50px;'>十年磨一剑，电子行业的风采与隐忧</h4>
-		                <p style='height: 60px;'>2009 是电子行业的一个分水岭。
-
-由于国际金融危机影响，2009 年电子行业成为国民经济中受冲击最...</p>
-		                <p>
-		                  <small>闲鱼</small>  <small style='margin-left:10px;'>2019-12-21</small> 
-		                </p>
-						<p><span>影响力: <span class='star'><i>★★</i>★★★</span></span></p>
-		            </div>
-		        </div>
-		    </a>
-		</div><div class='col-sm-6 col-md-4 newSize'>
-		   	<a href='news/newscontent-50' class='newSize'>
-		        <div class='thumbnail'>             
-		           <img src="/ueditor/php/upload/image/20191221/1576890049178022.jpg" title="1576890049178022.jpg" alt="5dfcc5d86227685985004988_1024.jpg"/>
-		        
-		            <div class='caption'>
-		                <h4 style='height: 50px;'>贾跃亭破产案“节节败退”，专家称不诚实者不受美国法律保护</h4>
-		                <p style='height: 60px;'>贾跃亭个人破产案被移交至加州意味着什么？
-2019 年 12 月 18 日，美国特拉华区破产法院就贾跃亭...</p>
-		                <p>
-		                  <small>闲鱼</small>  <small style='margin-left:10px;'>2019-12-21</small> 
-		                </p>
-						<p><span>影响力: <span class='star'><i>★★</i>★★★</span></span></p>
-		            </div>
-		        </div>
-		    </a>
-		</div><div class='col-sm-6 col-md-4 newSize'>
-		   	<a href='news/newscontent-49' class='newSize'>
-		        <div class='thumbnail'>             
-		           <img src="/ueditor/php/upload/image/20191221/1576889988139177.jpg" title="1576889988139177.jpg" alt="5dfcda9b622768cda900086f_1024.jpg"/>
-		        
-		            <div class='caption'>
-		                <h4 style='height: 50px;'>茅台动真格了！整顿“傍名牌”乱象，子公司将陆续停用集团 LOGO</h4>
-		                <p style='height: 60px;'>茅台动真格了！
-
-12 月 19 日，茅台集团第五十次党委会作出决定：各酒业子公司陆续停用集团 LOG...</p>
-		                <p>
-		                  <small>闲鱼</small>  <small style='margin-left:10px;'>2019-12-21</small> 
-		                </p>
-						<p><span>影响力: <span class='star'><i>★★</i>★★★</span></span></p>
-		            </div>
-		        </div>
-		    </a>
-		</div><div class='col-sm-6 col-md-4 newSize'>
-		   	<a href='news/newscontent-48' class='newSize'>
-		        <div class='thumbnail'>             
-		           <img src="/ueditor/php/upload/image/20191221/1576889889108104.jpg" title="1576889889108104.jpg" alt="0.webp.jpg"/>
-		        
-		            <div class='caption'>
-		                <h4 style='height: 50px;'>辉山乳业被强制退市，市值一天内蒸发300亿港元</h4>
-		                <p style='height: 60px;'>12月18日晚间，港交所发布公告称，由12月23日上午9时起，对辉山乳业的上市地位予以取消，该公司的股份自...</p>
-		                <p>
-		                  <small>闲鱼</small>  <small style='margin-left:10px;'>2019-12-21</small> 
-		                </p>
-						<p><span>影响力: <span class='star'><i>★★</i>★★★</span></span></p>
-		            </div>
-		        </div>
-		    </a>
-		</div><div class='col-sm-6 col-md-4 newSize'>
-		   	<a href='news/newscontent-47' class='newSize'>
-		        <div class='thumbnail'>             
-		           <img src="/ueditor/php/upload/image/20191221/1576889750924709.jpg" title="1576889750924709.jpg" alt="0.jpg"/>
-		        
-		            <div class='caption'>
-		                <h4 style='height: 50px;'>盘点2019年十大泡沫事件：数字货币、电子烟、共享汽车 还有啥？</h4>
-		                <p style='height: 60px;'>有金钱的地方，就会有泡沫。今年全球经济在2019年全球股市和其它风险资产可谓是"惊心动魄"。
-
-在全球...</p>
-		                <p>
-		                  <small>闲鱼</small>  <small style='margin-left:10px;'>2019-12-21</small> 
-		                </p>
-						<p><span>影响力: <span class='star'><i>★★</i>★★★</span></span></p>
-		            </div>
-		        </div>
-		    </a>
-		</div><div class='col-sm-6 col-md-4 newSize'>
-		   	<a href='news/newscontent-46' class='newSize'>
-		        <div class='thumbnail'>             
-		           <img src="/ueditor/php/upload/image/20191221/1576889686363747.jpg" title="1576889686363747.jpg" alt="5dfc932d62276859850045aa_1024.jpg"/>
-		        
-		            <div class='caption'>
-		                <h4 style='height: 50px;'>神秘金主死摁成交价！央行 5 天撒出近万亿 交易员发“灵魂三问”</h4>
-		                <p style='height: 60px;'>5 天，接近 1 万亿。
-
-年底将至，又到了央行派发过年大红包的时候。
-
-央行 20 日早间宣布开...</p>
-		                <p>
-		                  <small>闲鱼</small>  <small style='margin-left:10px;'>2019-12-21</small> 
-		                </p>
-						<p><span>影响力: <span class='star'><i>★★</i>★★★</span></span></p>
-		            </div>
-		        </div>
-		    </a>
-		</div><div class='col-sm-6 col-md-4 newSize'>
-		   	<a href='news/newscontent-45' class='newSize'>
-		        <div class='thumbnail'>             
-		           <img src="/ueditor/php/upload/image/20191220/1576802714321103.jpg" title="1576802714321103.jpg" alt="5dfba51d6227685985003022_1024.jpg"/>
-		        
-		            <div class='caption'>
-		                <h4 style='height: 50px;'>普京表态：不打算与中国建立军事同盟</h4>
-		                <p style='height: 60px;'>据俄通社报道，在谈到中俄关系时，普京表示了高度赞赏：俄中之间最重要的不是数字，而是我们的互信达到了前所未有...</p>
-		                <p>
-		                  <small>闲鱼</small>  <small style='margin-left:10px;'>2019-12-20</small> 
-		                </p>
-						<p><span>影响力: <span class='star'><i>★★★</i>★★</span></span></p>
-		            </div>
-		        </div>
-		    </a>
-		</div>
+				".$news12Html."
 	
 				</div>
 						            
@@ -737,10 +593,7 @@
 	                var sTop = $(window).scrollTop();
 	                var oHeight = $(this).height();
 	                var oIndex = $(this).index('.run-number');
-	                //console.log(oTop+'
-'+sTop+'
-'+oHeight+'
-'+$(window).height());
+	                //console.log(oTop+'\r\n'+sTop+'\r\n'+oHeight+'\r\n'+$(window).height());
 	                if (oTop >= sTop && (oTop + (oHeight / 2)) < (sTop + $(window).height())) {
 	                    numGroup[oIndex].start();
 	                    //console.log('元素'+$(this).index('.run-number')+'可见');
@@ -915,4 +768,27 @@
 	
 	
 	</body>
-	</html>	
+	</html>	";
+
+// 	echo  json_encode($data);
+ file_put_contents("index.html", $htmlContent);
+
+
+
+
+
+
+
+
+
+	
+// file_put_contents('test.html', $htmlContent);
+// $jsonp="successCallback(".$json_string.")";
+// echo $jsonp ;
+
+// file_put_contents('zhishi.js', $jsonp);	
+
+
+
+
+	

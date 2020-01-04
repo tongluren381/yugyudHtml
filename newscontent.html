@@ -98,9 +98,9 @@
 						
 							
 								<h3 class="siteTitle">
-									{{site.title}}
+									
 								</h3>
-								<p class="siteDate">{{site.date}}</p>
+								<p class="siteDate"></p>
 								<p  class="siteWeight " id="num5">
 									<span>影响力: <span class="star"><i>★★★★★</i></span></span>
 								</p>
@@ -259,7 +259,7 @@
 <script type="text/javascript">
 	$(function(){
 		var	site=[];
-
+		$(".siteWeight").hide();
 		$.ajax({
 			url: 'sever/xinwen.js',
 			type: 'get',
@@ -291,7 +291,7 @@
 			$('meta[name="description"]').attr('content',site.jianjie );
 			$('meta[name="keywords"]').attr('content',site.keyWords );
 			
-			$(".siteWeight").hide();
+			
 			
 			if(site.weight==5){
 				$("#num5").show();
@@ -449,69 +449,69 @@
 		<!-- 立即咨询 -->
 
 		<!-- 立即咨询 -->
-		<!-- 通用页脚 -->
-		<div id="footer">
-			<div class="container">
-				<div class="row">
-					<div class="col-xs-6 col-sm-2 footer-item">
-						<div class="footer-list">
-							<h4>常用工具</h4>
-							<ul>
-								<li><a href="" target="_blank">数据查询</a></li>
-								<li><a href="">股民论坛</a></li>
-								<li><a href="">资料下载</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-xs-6 col-sm-2 footer-item">
-						<div class="footer-list">
-							<h4>快捷裢接</h4>
-							<ul>
-								<li><a href="">财经十二</a></li>
-								<li><a href="">开户指导</a></li>
-								<li><a href="">常见问题</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-xs-6 col-sm-2 footer-item">
-						<div class="footer-list">
-							<h4>关于我们</h4>
-							<ul>
-								<li><a href="">联系我们</a></li>
-								<li><a href="">服务咨询</a></li>
-								<li><a href="javascript:AddFavorite('北京股票开户','http://www.yugyud.com/');">收藏本站</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-xs-6 col-sm-2 footer-item">
-						<div class="footer-wechat">
-							<img class="img-responsive" src="images/wechat.png">
+<!-- 通用页脚 -->
+<div id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6 col-sm-2 footer-item">
+                <div class="footer-list">
+                    <h4>常用工具</h4>
+                    <ul>
+                        <li><a href="http://data.eastmoney.com" target="_blank">数据查询</a></li>
+                        <li><a href="http://guba.eastmoney.com">股民论坛</a></li>
+                        <li><a href="https://www.htsec.com/ChannelHome/2016102402/index.shtml">资料下载</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-2 footer-item">
+                <div class="footer-list">
+                    <h4>快捷裢接</h4>
+                    <ul>
+                        <li><a href="newslist.html">财经十二</a></li>
+                        <li><a href="caijingbowen.html">开户指导</a></li>
+                        <li><a href="xuexijinjie.html">常见问题</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-2 footer-item">
+                <div class="footer-list">
+                    <h4>关于我们</h4>
+                    <ul>
+                        <li><a href="caijingbowen.html">联系我们</a></li>
+                        <li><a href="caijingbowen.html">服务咨询</a></li>
+                        <li><a href="javascript:AddFavorite('北京股票开户','http://www.yugyud.com/');">收藏本站</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-2 footer-item">
+                <div class="footer-wechat">
+                    <img class="img-responsive" src="images/wechat.png">
+                    
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-4 footer-item footer-item-last">
+                <div class="footer-contact">
+                    
+                    <h2><img src="images/pc-footer-qq.png">1036167988</h2>
+                    <h2><img src="images/pc-footer-mob.png">17710722720</h2>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<div id="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <p><a href="/yugyud/index.html">北京股票开户</a></p>
 
-						</div>
-					</div>
-					<div class="col-xs-12 col-sm-4 footer-item footer-item-last">
-						<div class="footer-contact">
 
-							<h2><img src="images/pc-footer-qq.png">1036167988</h2>
-							<h2><img src="images/pc-footer-mob.png">17710722720</h2>
-						</div>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-			</div>
-		</div>
-		<div id="copyright">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-12">
-						<p>北京股票开户 </p>
-
-
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- 通用页脚 -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 通用页脚 -->
 		<!-- 手机端底部 -->
 		<div id="mob-bottom" class="visible-xs-block">
 			<div class="container">

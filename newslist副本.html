@@ -8,9 +8,9 @@
 		<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
 		<meta name="renderer" content="webkit">
 		<!-- 目前仅限360急速浏览 webkit:急速  ie-comp:ie兼容模式   ie-stand: ie标准模式 -->
-		<title class="siteTitle"></title>
+		<title>财经十二</title>
 		<meta name="keywords" content="股票开户,北京股票开户,炒股,手续费,佣金">
-		<meta name="description" content="专业为股民服务" class="siteJianjie">
+		<meta name="description" content="专业为股民服务">
 		<link rel="icon" type="image/x-icon" href="images/g.ico" />
 		<!-- Bootstrap中文字体版 -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -51,11 +51,11 @@
 						<ul class="nav navbar-nav navbar-right">
 							<li><a href="index.html">首页 </a></li>
 							<li><a href="seocontent.html?id=58">优惠开户</a></li>
-							<li ><a href="newslist.html">财经十二</a>
-								
+							<li class="active"><a href="newslist.html">财经十二<span class="sr-only">(current)</span></a>
+								<p class="line-top hidden-xs"></p>
 							</li>
 							<li><a href="xuexijinjie.html">学习进阶</a></li>
-							<li class="active"><a href="caijingbowen.html">财经博文<span class="sr-only">(current)</span></a><p class="line-top hidden-xs"></p></li>
+							<li><a href="caijingbowen.html">财经博文</a></li>
 							<!--放seo文章的-->
 							<li><a href="seocontent.html?id=58">联系我们</a></li>
 
@@ -72,7 +72,7 @@
 				<div class="col-sm-12">
 					<ol class="breadcrumb" style="margin-top: 10px; margin-bottom: 10px;">
 						<li><a href="index.html">首页</a></li>
-						<li><a href="caijingbowen.html">财经博文</a></li>
+						<li><a href="newslist.html">财经十二</a></li>
 					</ol>
 				</div>
 			</div>
@@ -82,50 +82,53 @@
 		<div class="main-container" id="app">
 			<div class="container">
 				<div class="row main-container-row" style="position: relative">
-					<div class="col-xs-12 col-sm-9  news-article" >
+					<div class="col-xs-12 col-sm-9  service-list" >
 
 <!-- 						<tr v-for="site in sites">
 							<td v-text="site.name"></td>
 							<td v-text="site.age"></td>
 							<td v-text="site.address"></td>
 						</tr> -->
-						
-						
-						
-						
-						<div class="article-title" >
+						<div  v-for="site in sites">
 
-						
-							
-								<h3 class="siteTitle">
-									
-								</h3>
-								<p class="siteDate"></p>
-								<p  class="siteWeight " id="num5">
-									<span>影响力: <span class="star"><i>★★★★★</i></span></span>
-								</p>
-								<p  class="siteWeight" id="num4">
-									<span>影响力: <span class="star"><i>★★★★</i>★</span></span>
-								</p>										
-								<p  class="siteWeight " id="num3">
-									<span>影响力: <span class="star"><i>★★★</i>★★</span></span>
-								</p>	
-								<p n class="siteWeight " id="num2">
-									<span>影响力: <span class="star"><i>★★</i>★★★</span></span>
-								</p>
-								<p  class="siteWeight" id="num1">
-									<span>影响力: <span class="star"><i>★</i>★★★★</span></span>
-								</p>																																
+							<a :href='"newscontent.html?id="+site.id'>
+								<!-- 蜘蛛抓取不到js，所以为了优化最好的事href跳转，不用js，ajax -->
+								
+								<div class="row ">
 
-								<div class="siteContent">
-									
+									<div class="col-md-7">
+
+										<h3 >
+											{{site.title}}
+										</h3>
+										<p>{{site.date}}</p>
+										<p v-if="site.weight==5">
+											<span>影响力: <span class="star"><i>★★★★★</i></span></span>
+										</p>
+										<p v-else-if="site.weight==4">
+											<span>影响力: <span class="star"><i>★★★★</i>★</span></span>
+										</p>										
+										<p v-else-if="site.weight==3">
+											<span>影响力: <span class="star"><i>★★★</i>★★</span></span>
+										</p>	
+										<p v-else-if="site.weight==2">
+											<span>影响力: <span class="star"><i>★★</i>★★★</span></span>
+										</p>
+										<p v-else-if="site.weight==1">
+											<span>影响力: <span class="star"><i>★</i>★★★★</span></span>
+										</p>																																
+
+										<p class="text-muted" style="font-size: 16px;" >
+											{{site.jianjie}}
+										</p>
+
+									</div>
+									<div class="col-md-5"   >
+										<img class="img-responsive center-block" v-bind:src="site.imgUrl" alt="{title}">
+									</div>
 								</div>
-
-										
-
-
-								<hr>
-							
+							</a>
+							<hr>
 						</div>
 						
 						
@@ -184,10 +187,12 @@
 								<h4>年度重磅新闻</h4>
 
 
-								<ul >									
-									<li class="keyWords"><a target="_blank" href=""></a></li>
+								<ul v-for="site in sites">									
+									<li v-if="site.weight==5"><a target="_blank" href="">{{site.title}}</a></li>
 								</ul>
-								
+								<ul >																		
+									<li >没有更多重要新闻了</li>
+								</ul>								
 
 								<hr />
 								<h4>常用工具</h4>
@@ -208,119 +213,40 @@
 		</div>
 		
 <!-- vue  js部分		 -->
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 	var app = new Vue({
 		el: '#app',
 		data: {
-			site: []
-				
+			sites: []
 		},
-		
-		mounted: function() {
+		created: function() {
 			//为了在内部函数能使用外部函数的this对象，要给它赋值了一个名叫self的变量。
 			var self = this;
-
 			$.ajax({
-				url: 'sever/xinwen.json',
+				url: 'sever/xinwen.js',
 				type: 'get',
+				async:false, 
 				data: {},
-				dataType: 'json'
+				dataType: 'jsonp',
+				jsonp: "callback",
+				jsonpCallback:"successCallback",
 			}).then(function(res) {
-			var id = sessionStorage.getItem('id');
-				
-				console.log(id);
-				console.log(res);				
-				$.each(res, function (i, item) {
-					if(res[i].id == id ){
-						self.site = res[i];
-						console.log(self.site);
-					}
-					
-					
-				})
-												
-
+				console.log(res);
 				//把从json获取的数据赋值给数组								
-				
+				self.sites = res;
 								
 			}).fail(function() {
 				console.log('失败');
 			})
-	
+			
 		}
-
-
-
+		// methods: {
+		// cunIdtiao: function (id) {
+		// // sessionStorage.setItem('id', id); //想想还是觉得session的方法传值，调用服务器，存值不好
+		// location.href="newscontent.html?id="+id;
+		// }
+		// }
 	});
-	
-</script>	 -->
-
-<!-- 写入页面数据js	 -->
-<script type="text/javascript">
-	$(function(){
-		var	site=[];
-		$(".siteWeight").hide();
-		$.ajax({
-			url: 'sever/seo.js',
-			type: 'get',
-			async:false, 
-			data: {},
-			dataType: 'jsonp',
-			jsonp: "callback",
-			jsonpCallback:"successCallback",
-		}).then(function(res) {
-			var id=window.location.search;
-				id=id.substring(4);
-		// var id = sessionStorage.getItem('id');
-			
-			console.log(id);
-			console.log(res);				
-			$.each(res, function (i, item) {
-				if(res[i].id == id ){
-					site = res[i];
-					console.log(site);
-				}
-				
-				
-			});										
-			//把从json获取的数据赋值给数组
-			$('meta[name="description"]').attr('content',site.jianjie );
-			$('meta[name="keywords"]').attr('content',site.keyWords );
-			
-			
-			
-			if(site.weight==5){
-				$("#num5").show();
-			}else if(site.weight==4){
-				$("#num4").show();
-			}else if(site.weight==3){
-				$("#num3").show();
-			}else if(site.weight==2){
-				$("#num2").show();
-			}else{
-				$("#num1").show();
-			};
-										
-			$(".siteTitle").html(site.title);
-			$(".siteDate").html(site.date);
-			
-			$(".siteContent").html(site.content);
-			$(".siteContent img").addClass("img-responsive center-block");
-			//把数据写入页面				
-		}).fail(function() {
-			console.log('失败');
-		})		
-		
-		
-		
-	})
-
-
-		
-
-
-
-
 	
 </script>	
 
@@ -544,7 +470,7 @@
 
 
 		<script type="text/javascript" src="js/common.js"></script>
-	
+
 
 
 	</body>

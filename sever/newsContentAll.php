@@ -1,4 +1,31 @@
-<!DOCTYPE html>
+<?php
+	header("Content-type:text/html;charset=UTF-8");
+	require "../admin/connet.php";   //导入mysql.php访问数据库 
+	$conn=new Mysql();
+	$sql="SELECT * FROM news WHERE type='新闻' order by id desc ";
+    $result=$conn->sql($sql);
+
+	
+	$num_results = $result -> num_rows; //结果行数 
+
+	 for($i =0  ;$i < $num_results ;$i++)//循环输出每组元素
+	  {
+	 	$row = $result -> fetch_assoc();
+		echo $row['id'];
+		if($row["weight"]==5){
+			$weHtml="<span>影响力: <span class='star'><i>★★★★★</i></span></span>";
+		}elseif($row["weight"]==4){
+			$weHtml="<span>影响力: <span class='star'><i>★★★★</i>★</span></span>";
+		}elseif($row["weight"]==3){
+			$weHtml="<span>影响力: <span class='star'><i>★★★</i>★★</span></span>";
+		}elseif($row["weight"]==2){
+			$weHtml="<span>影响力: <span class='star'><i>★★</i>★★★</span></span>";
+		}elseif($row["weight"]==1){
+			$weHtml="<span>影响力: <span class='star'><i>★</i>★★★★</span></span>";
+		};
+
+
+	$htmlContent="<!DOCTYPE html>
 <html lang='zh-CN'>
 
 	<head>
@@ -8,24 +35,24 @@
 		<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
 		<meta name='renderer' content='webkit'>
 		<!-- 目前仅限360急速浏览 webkit:急速  ie-comp:ie兼容模式   ie-stand: ie标准模式 -->
-		<title>财经博文--北京股票开户</title>
-		<meta name='keywords' content='股票开户,北京股票开户,炒股,手续费,佣金'>
-		<meta name='description' content='专业为股民服务'>
-		<link rel='icon' type='image/x-icon' href='images/g.ico' />
+		<title class='siteTitle'>".$row['title']."</title>
+		<meta name='keywords' content='".$row['keyWords']."'>
+		<meta name='description' content='".$row['jianjie']."' >
+		<link rel='icon' type='image/x-icon' href='../images/g.ico' />
 		<!-- Bootstrap中文字体版 -->
-		<link href='css/bootstrap.min.css' rel='stylesheet'>
+		<link href='../css/bootstrap.min.css' rel='stylesheet'>
 		<!-- 自定义样式 -->
-		<link href='css/common.css' rel='stylesheet'>
+		<link href='../css/common.css' rel='stylesheet'>
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
-    <script src='js/html5shiv.min.js'></script>
-    <script src='js/respond.min.js'></script>
+    <script src='../js/html5shiv.min.js'></script>
+    <script src='../js/respond.min.js'></script>
     <![endif]-->
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-		<script src='js/jquery.min.js'></script>
+		<script src='../js/jquery.min.js'></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
-		<script src='js/bootstrap.min.js'></script>
+		<script src='../js/bootstrap.min.js'></script>
 	</head>
 
 	<body >
@@ -42,19 +69,21 @@
 							<span class='icon-bar'></span>
 							<span class='icon-bar'></span>
 						</button>
-						<a class='navbar-brand' style='padding:0 0 0 15px;' href='index.html'><img alt='股票开户' style='max-width:130px;'
-                                                                                  src='images/logo.png'><span class='hide'>股票开户</span></a>
+						<a class='navbar-brand' style='padding:0 0 0 15px;' href='../index.html'><img alt='股票开户' style='max-width:130px;'
+                                                                                  src='../images/logo.png'><span class='hide'>股票开户</span></a>
 					</div>
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
 						<ul class='nav navbar-nav navbar-right'>
-							<li><a href='index.html'>首页 </a></li>
-							<li><a href='seo/seocontent-58.html'>优惠开户</a></li>
-							<li ><a href='newslist.html'>财经十二</a></li>
-							<li><a href='xuexijinjie.html'>学习进阶</a></li>
-							<li class='active'><a href='caijingbowen.html'>财经博文<span class='sr-only'>(current)</span></a><p class='line-top hidden-xs'></p></li>
+							<li><a href='../index.html'>首页 </a></li>
+							<li><a href='../seo/seocontent-58.html'>优惠开户</a></li>
+							<li class='active'><a href=../newslist.html'>财经十二<span class='sr-only'>(current)</span></a>
+								<p class='line-top hidden-xs'></p>
+							</li>
+							<li><a href='../xuexijinjie.html'>学习进阶</a></li>
+							<li><a href='../caijingbowen.html'>财经博文</a></li>
 							<!--放seo文章的-->
-							<li><a href='seo/seocontent-58.html'>联系我们</a></li>
+							<li><a href='../seo/seocontent-58.html'>联系我们</a></li>
 
 						</ul>
 					</div>
@@ -68,115 +97,52 @@
 			<div class='row'>
 				<div class='col-sm-12'>
 					<ol class='breadcrumb' style='margin-top: 10px; margin-bottom: 10px;'>
-						<li><a href='index.html'>首页</a></li>
-						<li><a href='caijingbowen.html'>财经博文</a></li>
+						<li><a href='../index.html'>首页</a></li>
+						<li><a href='../newslist.html'>财经十二</a></li>
+						<li>".$row['title']."</li>
 					</ol>
 				</div>
 			</div>
 		</div>
 
 		<!--主体-->
-		<div class='main-container'>
+		<div class='main-container' >
 			<div class='container'>
 				<div class='row main-container-row' style='position: relative'>
-					<div class='col-xs-12 col-sm-9  service-list' >
+					<div class='col-xs-12 col-sm-9  news-article' >
 
-						<div class='changeHtml'>
-						<a href='seo/seocontent-493.html'>
-								<!-- 蜘蛛抓取不到js，所以为了优化最好的事href跳转，不用js，ajax -->
-								
-								<div class='row '>
 
-									<div class='col-md-7'>
+						
+						
+						
+						
+						<div class='article-title' >
 
-										<h3 >
-											广发证券股票开户，广发证券客服，广发证券炒股开户，北京广发证券
-										</h3>
-										<p>2019-12-27</p>
-										<p >
-											<span>影响力: <span class='star'><i>★★</i>★★★</span></span>
-										</p>
-																																						
+						
+							
+								<h3 >
+								".$row['title']."	
+								</h3>
+								<p >".$row['date']."</p>
+								<p>".$weHtml."</p>																										
+								<div class='siteContent'>
+									".$row['content']."
+								</div>
 
-										<p class='text-muted' style='font-size: 16px;' >
-											
-		...
-										</p>
-
-									</div>
-									<div class='col-md-5'   >
 										
-		
-									</div>
-								</div>
-							</a>
-							<hr><a href='seo/seocontent-492.html'>
-								<!-- 蜘蛛抓取不到js，所以为了优化最好的事href跳转，不用js，ajax -->
-								
-								<div class='row '>
 
-									<div class='col-md-7'>
 
-										<h3 >
-											股票开户为什么选择海通证券，海通证券股票开户去哪儿？
-										</h3>
-										<p>2019-12-27</p>
-										<p >
-											<span>影响力: <span class='star'><i>★★</i>★★★</span></span>
-										</p>
-																																						
-
-										<p class='text-muted' style='font-size: 16px;' >
-											股票开户为什么选择海通证券，海通证券股票开户去哪儿？
-		...
-										</p>
-
-									</div>
-									<div class='col-md-5'   >
-												
-				
-									</div>
-								</div>
-							</a>
-							<hr><a href='seo/seocontent-58.html'>
-								<!-- 蜘蛛抓取不到js，所以为了优化最好的事href跳转，不用js，ajax -->
-								
-								<div class='row '>
-
-									<div class='col-md-7'>
-
-										<h3 >
-											证券开户咨询电话，客服电话 17710722720
-										</h3>
-										<p>2019-12-21</p>
-										<p >
-											<span>影响力: <span class='star'><i>★★</i>★★★</span></span>
-										</p>
-																																						
-
-										<p class='text-muted' style='font-size: 16px;' >
-													咨询个人电话17710722720
-
-				...
-										</p>
-
-									</div>
-									<div class='col-md-5'   >
-																		
-									</div>
-								</div>
-							</a>
-							<hr>
-
+								<hr>
+							
 						</div>
-																		
-
-
-
+						
+						
+											
 
 
 					</div>
-													
+					
+												
 					<!--右侧导引栏开始-->
 					<div class='col-sm-3'>
 					
@@ -193,9 +159,9 @@
 
 
 								<ul >									
-								<li><a href='seo/seocontent-58.html'>股票开户如何选择</a></li>
+									<li class='keyWords'><a target='_blank' href=''></a></li>
 								</ul>
-							
+								
 
 								<hr />
 								<h4>常用工具</h4>
@@ -213,16 +179,13 @@
 					<p class='hidden-xs' id='right-line'></p>
 				</div>
 			</div>
-		</div>
+		</div>		
+
 <script type='text/javascript'>
 $(function(){
-	$('.changeHtml img').addClass('img-responsive center-block');
+	$('.article-title img').addClass('img-responsive center-block');
 })	
-</script>		
-		
-
-
-		
+</script>				
 
 		<script type='text/javascript'>
 			/** 响应式sidebar 通用版块 **/
@@ -361,9 +324,9 @@ $(function(){
                 <div class='footer-list'>
                     <h4>快捷裢接</h4>
                     <ul>
-                        <li><a href='newslist.html'>财经十二</a></li>
-                        <li><a href='caijingbowen.html'>开户指导</a></li>
-                        <li><a href='xuexijinjie.html'>常见问题</a></li>
+                        <li><a href='../newslist.html'>财经十二</a></li>
+                        <li><a href='../caijingbowen.html'>开户指导</a></li>
+                        <li><a href='../xuexijinjie.html'>常见问题</a></li>
                     </ul>
                 </div>
             </div>
@@ -371,23 +334,23 @@ $(function(){
                 <div class='footer-list'>
                     <h4>关于我们</h4>
                     <ul>
-                        <li><a href='caijingbowen.html'>联系我们</a></li>
-                        <li><a href='caijingbowen.html'>服务咨询</a></li>
+                        <li><a href='../caijingbowen.html'>联系我们</a></li>
+                        <li><a href='../caijingbowen.html'>服务咨询</a></li>
                         <li><a href='javascript:AddFavorite('北京股票开户','http://www.yugyud.com/');'>收藏本站</a></li>
                     </ul>
                 </div>
             </div>
             <div class='col-xs-6 col-sm-2 footer-item'>
                 <div class='footer-wechat'>
-                    <img class='img-responsive' src='images/wechat.png'>
+                    <img class='img-responsive' src='../images/wechat.png'>
                     
                 </div>
             </div>
             <div class='col-xs-12 col-sm-4 footer-item footer-item-last'>
                 <div class='footer-contact'>
                     
-                    <h2><img src='images/pc-footer-qq.png'>1036167988</h2>
-                    <h2><img src='images/pc-footer-mob.png'>17710722720</h2>
+                    <h2><img src='../images/pc-footer-qq.png'>1036167988</h2>
+                    <h2><img src='../images/pc-footer-mob.png'>17710722720</h2>
                 </div>
             </div>
             <div class='clearfix'></div>
@@ -412,25 +375,25 @@ $(function(){
 				<div class='row'>
 					<div class='col-xs-3 mob-bottom-item'>
 						<a href='tel:17710722720'>
-							<img class='img-responsive center-block' src='images/mob-footer-phone.png'>
+							<img class='img-responsive center-block' src='../images/mob-footer-phone.png'>
 							<span>电话咨询</span>
 						</a>
 					</div>
 					<div class='col-xs-3 mob-bottom-item'>
 						<a href='tel:17710722720'>
-							<img class='img-responsive center-block' src='images/mob-footer-mob.png'>
+							<img class='img-responsive center-block' src='../images/mob-footer-mob.png'>
 							<span>紧急电话</span>
 						</a>
 					</div>
 					<div class='col-xs-3 mob-bottom-item'>
 						<a href='http://wpa.qq.com/msgrd?v=3&uin=1036167988&site=qq&menu=yes'>
-							<img class='img-responsive center-block web-chat' src='images/mob-footer-chat.png'>
+							<img class='img-responsive center-block web-chat' src='../images/mob-footer-chat.png'>
 							<span>在线咨询</span>
 						</a>
 					</div>
 					<div class='col-xs-3 mob-bottom-item'>
 						<a href='sms:17710722720'>
-							<img class='img-responsive center-block' src='images/mob-footer-msm.png'>
+							<img class='img-responsive center-block' src='../images/mob-footer-msm.png'>
 							<span>短信咨询</span>
 						</a>
 					</div>
@@ -441,9 +404,40 @@ $(function(){
 		<!-- 整站通用的尾部 -->
 
 
-		<script type='text/javascript' src='js/common.js'></script>
-
+		<script type='text/javascript' src='../js/common.js'></script>
+	
 
 
 	</body>
-</html>
+</html>";
+
+
+
+ file_put_contents("newscontent-".$row['id'].".html", $htmlContent);
+		
+		
+	 }	;
+	
+
+// 	echo  json_encode($data);
+
+
+
+
+
+
+
+
+
+
+	
+// file_put_contents('test.html', $htmlContent);
+// $jsonp="successCallback(".$json_string.")";
+// echo $jsonp ;
+
+// file_put_contents('zhishi.js', $jsonp);	
+
+
+
+
+	

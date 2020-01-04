@@ -1,4 +1,73 @@
-<!DOCTYPE html>
+<?php
+	header("Content-type:text/html;charset=UTF-8");
+	require "../admin/connet.php";   //导入mysql.php访问数据库 
+	$conn=new Mysql();
+	$sql="SELECT * FROM news WHERE type='seo' order by id desc ";
+    $result=$conn->sql($sql);
+
+	
+	$num_results = $result -> num_rows; //结果行数 
+	$forHtml="";
+
+	 for($i =0  ;$i < $num_results ;$i++)//循环输出每组元素
+	  {
+	 	$row = $result -> fetch_assoc();
+		echo $row['id'];
+		if($row["weight"]==5){
+			$weHtml="<span>影响力: <span class='star'><i>★★★★★</i></span></span>";
+			
+		}elseif($row["weight"]==4){
+			$weHtml="<span>影响力: <span class='star'><i>★★★★</i>★</span></span>";
+		}elseif($row["weight"]==3){
+			$weHtml="<span>影响力: <span class='star'><i>★★★</i>★★</span></span>";
+		}elseif($row["weight"]==2){
+			$weHtml="<span>影响力: <span class='star'><i>★★</i>★★★</span></span>";
+		}elseif($row["weight"]==1){
+			$weHtml="<span>影响力: <span class='star'><i>★</i>★★★★</span></span>";
+		};
+		$row['jianjie']=mb_substr($row['jianjie'], 0, 53, 'utf-8')."...";
+
+		
+		
+		
+		$forHtml.="<a href='seo/seocontent-".$row['id'].".html'>
+								<!-- 蜘蛛抓取不到js，所以为了优化最好的事href跳转，不用js，ajax -->
+								
+								<div class='row '>
+
+									<div class='col-md-7'>
+
+										<h3 >
+											".$row['title']."
+										</h3>
+										<p>".$row['date']."</p>
+										<p >
+											".$weHtml."
+										</p>
+																																						
+
+										<p class='text-muted' style='font-size: 16px;' >
+											".$row['jianjie']."
+										</p>
+
+									</div>
+									<div class='col-md-5'   >
+										".$row['imgH']."
+									</div>
+								</div>
+							</a>
+							<hr>";
+	
+
+
+
+
+
+		
+		
+	 }	;
+
+	$htmlContent="<!DOCTYPE html>
 <html lang='zh-CN'>
 
 	<head>
@@ -82,91 +151,7 @@
 					<div class='col-xs-12 col-sm-9  service-list' >
 
 						<div class='changeHtml'>
-						<a href='seo/seocontent-493.html'>
-								<!-- 蜘蛛抓取不到js，所以为了优化最好的事href跳转，不用js，ajax -->
-								
-								<div class='row '>
-
-									<div class='col-md-7'>
-
-										<h3 >
-											广发证券股票开户，广发证券客服，广发证券炒股开户，北京广发证券
-										</h3>
-										<p>2019-12-27</p>
-										<p >
-											<span>影响力: <span class='star'><i>★★</i>★★★</span></span>
-										</p>
-																																						
-
-										<p class='text-muted' style='font-size: 16px;' >
-											
-		...
-										</p>
-
-									</div>
-									<div class='col-md-5'   >
-										
-		
-									</div>
-								</div>
-							</a>
-							<hr><a href='seo/seocontent-492.html'>
-								<!-- 蜘蛛抓取不到js，所以为了优化最好的事href跳转，不用js，ajax -->
-								
-								<div class='row '>
-
-									<div class='col-md-7'>
-
-										<h3 >
-											股票开户为什么选择海通证券，海通证券股票开户去哪儿？
-										</h3>
-										<p>2019-12-27</p>
-										<p >
-											<span>影响力: <span class='star'><i>★★</i>★★★</span></span>
-										</p>
-																																						
-
-										<p class='text-muted' style='font-size: 16px;' >
-											股票开户为什么选择海通证券，海通证券股票开户去哪儿？
-		...
-										</p>
-
-									</div>
-									<div class='col-md-5'   >
-												
-				
-									</div>
-								</div>
-							</a>
-							<hr><a href='seo/seocontent-58.html'>
-								<!-- 蜘蛛抓取不到js，所以为了优化最好的事href跳转，不用js，ajax -->
-								
-								<div class='row '>
-
-									<div class='col-md-7'>
-
-										<h3 >
-											证券开户咨询电话，客服电话 17710722720
-										</h3>
-										<p>2019-12-21</p>
-										<p >
-											<span>影响力: <span class='star'><i>★★</i>★★★</span></span>
-										</p>
-																																						
-
-										<p class='text-muted' style='font-size: 16px;' >
-													咨询个人电话17710722720
-
-				...
-										</p>
-
-									</div>
-									<div class='col-md-5'   >
-																		
-									</div>
-								</div>
-							</a>
-							<hr>
+						".$forHtml."
 
 						</div>
 																		
@@ -446,4 +431,27 @@ $(function(){
 
 
 	</body>
-</html>
+</html>";
+
+// 	echo  json_encode($data);
+ file_put_contents("caijingbowen.html", $htmlContent);
+
+
+
+
+
+
+
+
+
+	
+// file_put_contents('test.html', $htmlContent);
+// $jsonp="successCallback(".$json_string.")";
+// echo $jsonp ;
+
+// file_put_contents('zhishi.js', $jsonp);	
+
+
+
+
+	
